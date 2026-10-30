@@ -6,8 +6,10 @@ interface Props {
   path?: string;
 }
 const { title, description, lang, path = '/' } = Astro.props;
-const site = Astro.site?.toString().replace(/\/$/, '') ?? '';
-const canonical = new URL(path, `${site}/`).toString();
+const site = (Astro.site?.toString() ?? '').replace(/\/$/, '');
+// 站点可能部署在子路径下（如 GitHub Pages 的 /aftertone-web），
+// 直接把绝对路径交给 new URL 会丢掉 base 的 pathname，因此先去掉前导斜杠再拼接。
+const canonical = new URL(String(path).replace(/^\//, ''), site ? `${site}/` : '/').toString();
 ---
 
 <title>{title}</title>

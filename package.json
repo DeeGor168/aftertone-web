@@ -12,7 +12,6 @@
     "check": "astro check"
   },
   "dependencies": {
-    "@astrojs/sitemap": "^3.2.1",
     "astro": "^5.6.1"
   },
   "devDependencies": {
