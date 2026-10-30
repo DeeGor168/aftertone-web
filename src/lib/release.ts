@@ -1,6 +1,5 @@
 import fs from 'node:fs';
 import { fileURLToPath } from 'node:url';
-import snapshot from '../data/releases.snapshot.json';
 import type { Lang } from '../i18n/ui';
 
 export type Asset = {
@@ -21,21 +20,29 @@ export type ReleaseData = {
   assets: Asset[];
   fetchedAt: string | null;
   stale: boolean;
+  source?: string | null;
 };
 
-const generatedPath = () => fileURLToPath(new URL('../data/releases.generated.json', import.meta.url));
+const dataPath = () => fileURLToPath(new URL('../data/releases.json', import.meta.url));
+
+const EMPTY: ReleaseData = {
+  version: '0.0.0',
+  publishedAt: null,
+  notesUrl: 'https://github.com/DeeGor168/aftertone-releases/releases',
+  assets: [],
+  fetchedAt: null,
+  stale: true,
+  source: null,
+};
 
 export function loadRelease(): ReleaseData {
   try {
-    const p = generatedPath();
-    if (fs.existsSync(p)) {
-      const parsed = JSON.parse(fs.readFileSync(p, 'utf8')) as ReleaseData;
-      if (parsed?.assets?.length) return parsed;
-    }
+    const parsed = JSON.parse(fs.readFileSync(dataPath(), 'utf8')) as ReleaseData;
+    if (Array.isArray(parsed?.assets)) return parsed;
   } catch {
-    // 回退到快照
+    // 数据文件缺失或损坏时退回空态
   }
-  return snapshot as ReleaseData;
+  return EMPTY;
 }
 
 export function formatSize(bytes: number | undefined, lang: Lang = 'zh'): string {

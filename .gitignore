@@ -4,6 +4,3 @@ node_modules/
 .env
 .env.*
 !.env.example
-
-# 构建时生成的 Release 数据（snapshot 是手工兜底，需提交）
-src/data/releases.generated.json

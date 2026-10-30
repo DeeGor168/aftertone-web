@@ -19,8 +19,8 @@ export const ui = {
     'download.size': '大小',
     'download.updated': '发布于',
     'download.empty': '暂无可用下载，请稍后再来。',
-    'download.mirror': '下载慢？换镜像',
-    'download.mirrorHint': '国内网络可尝试镜像链接',
+    'download.mirror': '镜像下载（第三方）',
+    'download.mirrorHint': '镜像由第三方提供，内容未经本站核验，下载后请比对 SHA256',
   },
   en: {
     'nav.download': 'Download',
@@ -39,8 +39,8 @@ export const ui = {
     'download.size': 'Size',
     'download.updated': 'Released',
     'download.empty': 'No downloads available yet.',
-    'download.mirror': 'Slow? Use a mirror',
-    'download.mirrorHint': 'Try a mirror if GitHub is slow',
+    'download.mirror': 'Mirror (third party)',
+    'download.mirrorHint': 'Mirrors are third-party and unverified — check SHA256 after download',
   },
 } as const;
 

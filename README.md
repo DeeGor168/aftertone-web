@@ -22,8 +22,11 @@ npm run build          # 先拉数据再构建
 npm run preview
 ```
 
-首次 `dev` 前建议先跑一次 `npm run fetch:release`，否则下载页回退到
-`src/data/releases.snapshot.json`（空数据占位）。
+首次 `dev` 前建议先跑一次 `npm run fetch:release`，否则下载页读取
+`src/data/releases.json` 的当前内容（初始为空数据占位）。
+
+`fetch-release` 按顺序尝试：分发仓 `manifest.json` 直链 → GitHub API → 仓内上一次成功的数据。
+全部失败时保留原有数据，不会把下载页打空。
 
 ## 环境变量
 
@@ -38,9 +41,9 @@ npm run preview
 ## 目录结构
 
 ```
-scripts/fetch-release.mjs   构建时拉取 Release → src/data/releases.generated.json
+scripts/fetch-release.mjs   拉取 Release → src/data/releases.json
 src/
-  data/releases.snapshot.json   兜底快照（手工维护，需提交）
+  data/releases.json           最近一次成功拉取的发布数据（脚本写入，需提交）
   i18n/ui.ts                    中英文案字典
   lib/release.ts                数据读取、体积格式化、标签本地化、镜像链接
   layouts/BaseLayout.astro      全局壳（SEO / 深浅色 / 主题切换）
@@ -51,8 +54,45 @@ src/
 
 ## 发布联动
 
-客户端发版后向本仓发送 `repository_dispatch`（type `aftertone-release`），
-`deploy.yml` 会重新构建，下载链接自动更新到最新版本。另有每日定时重建兜底。
+数据契约放在公开分发仓：客户端 CI 在发布时除产物外再上传一份 `manifest.json`，
+官网通过
+`https://github.com/<RELEASES_REPO>/releases/latest/download/manifest.json`
+匿名读取，不依赖 GitHub API 与跨仓凭据。
+
+manifest 字段（与 `src/lib/release.ts` 的 `ReleaseData` 一致）：
+
+```json
+{
+  "version": "0.5.0",
+  "publishedAt": "2026-10-01T00:00:00Z",
+  "notesUrl": "https://github.com/DeeGor168/aftertone-releases/releases/tag/v0.5.0",
+  "assets": [
+    {
+      "platform": "windows",
+      "arch": "x64",
+      "kind": "installer",
+      "recommended": true,
+      "label": "AftertoneSetup-v0.5.0.exe",
+      "url": "https://github.com/DeeGor168/aftertone-releases/releases/download/v0.5.0/AftertoneSetup-v0.5.0.exe",
+      "size": 12345678,
+      "sha256": "…"
+    }
+  ]
+}
+```
+
+`platform/arch/kind` 可省略，此时按文件名推断（见 `RULES`）。产物只需带
+`label` + `url`，`size`/`sha256` 缺省时页面显示 `—`。
+
+触发方式：
+
+- `repository_dispatch`（type `aftertone-release`）：客户端发版后触发
+- 每 4 小时定时兜底
+- `push` 到 `main`、手动 `workflow_dispatch`
+
+同一个 workflow 内完成"拉数据 → 有变化则提交 `releases.json` → 构建 → 部署"，
+提交信息带 `[release-sync]` 标记，不会二次触发构建。同步失败时沿用上一次
+成功的数据继续部署，下载页不会退化成空态。
 
 ## 设计约定
 
