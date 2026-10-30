@@ -1,0 +1,90 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { loadRelease } from '../../lib/release';
+
+const release = loadRelease();
+const version = release.version && release.version !== '0.0.0' ? `v${release.version}` : '';
+
+const features = [
+  { t: 'Your own library', d: 'Navidrome / Subsonic / Jellyfin / Emby / Plex — the login screen detects the server type.' },
+  { t: 'Desktop-grade audio', d: 'libmpv on desktop with a built-in equalizer; just_audio on Android.' },
+  { t: 'Offline first', d: 'Single-track downloads, download manager, SQLite metadata cache.' },
+  { t: 'Lyrics and plugins', d: 'Server lyrics with lrclib fallback; custom lyric, cover and scrobble sources.' },
+  { t: 'Cross-device sync', d: 'Queue and playback position continue across your devices.' },
+  { t: 'Restrained', d: 'No ads. No recommendation algorithm. No social feed. Just you and the music.' },
+];
+
+const platforms = [
+  { t: 'Windows', d: 'Full support: desktop lyrics, tray icon, Inno Setup installer, SMTC media controls.' },
+  { t: 'Android', d: 'Release-signed APK, split per ABI, notification media controls.' },
+  { t: 'Linux', d: 'MPRIS media keys work; requires system libmpv.' },
+  { t: 'macOS', d: 'Control Center integration; no desktop lyrics under the sandbox.' },
+];
+
+const servers = ['Navidrome', 'Subsonic (Airsonic / Gonic)', 'Jellyfin', 'Emby', 'Plex'];
+---
+
+<BaseLayout
+  title="Aftertone · Listen to what lasts"
+  description="A cross-platform NAS music client for Navidrome, Subsonic, Jellyfin, Emby and Plex — a commercial-grade experience for the library you own."
+  lang="en"
+  path="/en/"
+>
+  <section class="section wrap" style="padding-top:96px">
+    <p class="eyebrow">NAS music client</p>
+    <h1>Listen to what lasts</h1>
+    <p class="lead" style="margin-top:20px">
+      Connect to Navidrome, Subsonic, Jellyfin or Plex and take your music back from the
+      rental model of streaming platforms. Every track stays yours.
+    </p>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:32px">
+      <a class="btn btn-primary" href="/en/download">
+        Download{version ? ` ${version}` : ''} · Windows
+      </a>
+      <a class="btn btn-ghost" href="/en/download">All platforms</a>
+    </div>
+    <p class="muted" style="margin-top:16px">Windows · macOS · Linux · Android　|　No ads · No algorithm</p>
+  </section>
+
+  <section class="section wrap" style="border-top:1px solid var(--line)">
+    <h2>Built for the library you own</h2>
+    <div class="grid grid-3" style="margin-top:32px">
+      {features.map((f) => (
+        <div class="card">
+          <h3 style="font-size:var(--step-1)">{f.t}</h3>
+          <p class="muted" style="margin:8px 0 0">{f.d}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="section wrap" style="border-top:1px solid var(--line)">
+    <h2>One codebase, four platforms</h2>
+    <div class="grid grid-4" style="margin-top:32px">
+      {platforms.map((p) => (
+        <div class="card">
+          <h3 style="font-size:var(--step-1)">{p.t}</h3>
+          <p class="muted" style="margin:8px 0 0">{p.d}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="section wrap" style="border-top:1px solid var(--line)">
+    <h2>Supported servers</h2>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:24px">
+      {servers.map((s) => (
+        <span class="card" style="padding:10px 18px">{s}</span>
+      ))}
+    </div>
+    <p class="muted" style="margin-top:20px">
+      One unified model across protocols. Adding a server means implementing a single client interface.
+    </p>
+  </section>
+
+  <section class="section wrap" style="border-top:1px solid var(--line);text-align:center">
+    <h2>Start listening</h2>
+    <p class="lead" style="margin:16px auto 28px">Your music is already on your disk. It only needs a player.</p>
+    <a class="btn btn-primary" href="/en/download">Go to downloads</a>
+  </section>
+</BaseLayout>

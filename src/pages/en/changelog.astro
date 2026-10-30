@@ -1,0 +1,28 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { loadRelease } from '../../lib/release';
+
+const release = loadRelease();
+---
+
+<BaseLayout
+  title="Changelog · Aftertone"
+  description="Release history for Aftertone."
+  lang="en"
+  path="/en/changelog"
+>
+  <section class="section wrap" style="padding-top:72px">
+    <p class="eyebrow">Changelog</p>
+    <h1>Changelog</h1>
+    {
+      release.assets.length > 0 ? (
+        <p class="lead" style="margin-top:12px">
+          Latest version v{release.version} ·{' '}
+          <a href={release.notesUrl} rel="noopener">release notes</a>
+        </p>
+      ) : (
+        <p class="lead" style="margin-top:12px">No releases published yet.</p>
+      )
+    }
+  </section>
+</BaseLayout>

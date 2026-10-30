@@ -1,0 +1,75 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { t, type Lang } from '../i18n/ui';
+import { loadRelease, assetLabel, formatSize, mirrorUrl } from '../lib/release';
+
+const lang: Lang = 'zh';
+const release = loadRelease();
+const hasAssets = release.assets.length > 0;
+const order = ['windows', 'macos', 'linux', 'android'] as const;
+const sorted = [...release.assets].sort(
+  (a, b) => order.indexOf(a.platform) - order.indexOf(b.platform),
+);
+const updated = release.publishedAt ? release.publishedAt.slice(0, 10) : null;
+---
+
+<BaseLayout
+  title="下载 · 余音 Aftertone"
+  description="下载余音 Aftertone：Windows 安装包、macOS 压缩包、Linux 归档与 Android APK，支持校验与镜像加速。"
+  lang={lang}
+  path="/download"
+>
+  <section class="section wrap" style="padding-top:72px">
+    <p class="eyebrow">Download</p>
+    <h1>{t(lang, 'download.title')}</h1>
+    {
+      hasAssets ? (
+        <p class="lead" style="margin-top:12px">
+          当前版本 v{release.version}
+          {updated ? ` · ${t(lang, 'download.updated')} ${updated}` : ''}
+        </p>
+      ) : (
+        <p class="lead" style="margin-top:12px">{t(lang, 'download.empty')}</p>
+      )
+    }
+
+    {
+      hasAssets ? (
+        <div style="margin-top:36px">
+          {sorted.map((a) => (
+            <div
+              class="card"
+              style="margin-bottom:12px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between"
+            >
+              <div>
+                <div style="font-size:var(--step-1);font-family:var(--font-brand)">
+                  {assetLabel(a, lang)}
+                  {a.recommended ? (
+                    <span class="muted" style="margin-left:8px">· {t(lang, 'download.recommended')}</span>
+                  ) : null}
+                </div>
+                <div class="muted" style="margin-top:4px">
+                  {t(lang, 'download.size')} {formatSize(a.size, lang)}
+                  {a.sha256 ? ` · ${t(lang, 'download.sha256')} ${a.sha256.slice(0, 16)}…` : ''}
+                </div>
+              </div>
+              <div style="display:flex;gap:8px;flex-wrap:wrap">
+                <a class="btn btn-primary" href={a.url}>下载</a>
+                <a class="btn btn-ghost" href={mirrorUrl(a.url)}>{t(lang, 'download.mirror')}</a>
+              </div>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <p class="muted" style="margin-top:24px">
+          可前往 <a href={release.notesUrl} rel="noopener">aftertone-releases</a> 查看发布进度。
+        </p>
+      )
+    }
+
+    <p class="muted" style="margin-top:32px">
+      {t(lang, 'download.mirrorHint')}。Windows 建议用安装包；Android 优先 arm64-v8a，
+      旧机型选 armeabi-v7a。macOS 未公证，首次启动需右键 → 打开。
+    </p>
+  </section>
+</BaseLayout>

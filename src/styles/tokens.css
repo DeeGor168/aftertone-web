@@ -1,0 +1,56 @@
+:root {
+  --c-brand: #2c5f5d;
+  --c-brand-soft: #3d7a77;
+  --c-ink: #1a1a1a;
+  --c-paper: #f5f1e8;
+  --c-accent: #c8432b;
+  --c-muted: #8b8680;
+
+  --bg: var(--c-paper);
+  --bg-soft: #ece7dc;
+  --text: var(--c-ink);
+  --text-soft: #55524e;
+  --text-faint: var(--c-muted);
+  --line: #ddd8cd;
+  --surface: #ffffff;
+
+  --font-brand: 'Cormorant Garamond', 'Noto Serif SC', 'Songti SC', Georgia, serif;
+  --font-body: Inter, system-ui, -apple-system, 'Noto Sans SC', 'PingFang SC',
+    'Microsoft YaHei', sans-serif;
+
+  --radius: 12px;
+  --radius-sm: 8px;
+  --maxw: 1080px;
+  --step--1: 0.875rem;
+  --step-0: 1rem;
+  --step-1: 1.25rem;
+  --step-2: 1.5rem;
+  --step-3: 2rem;
+  --step-4: 2.75rem;
+}
+
+:root[data-theme='dark'] {
+  --bg: #141413;
+  --bg-soft: #1d1d1b;
+  --text: #ece7dc;
+  --text-soft: #b8b3a9;
+  --text-faint: #8b8680;
+  --line: #302f2c;
+  --surface: #1d1d1b;
+  --c-brand: #5dcaa5;
+  --c-brand-soft: #9fe1cb;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --bg: #141413;
+    --bg-soft: #1d1d1b;
+    --text: #ece7dc;
+    --text-soft: #b8b3a9;
+    --text-faint: #8b8680;
+    --line: #302f2c;
+    --surface: #1d1d1b;
+    --c-brand: #5dcaa5;
+    --c-brand-soft: #9fe1cb;
+  }
+}

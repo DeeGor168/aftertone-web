@@ -1,0 +1,49 @@
+---
+import '../styles/global.css';
+import Seo from '../components/Seo.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import { defaultLang, type Lang } from '../i18n/ui';
+
+interface Props {
+  title: string;
+  description: string;
+  lang?: Lang;
+  path?: string;
+}
+const { title, description, lang = defaultLang, path = '/' } = Astro.props;
+---
+
+<!doctype html>
+<html lang={lang === 'zh' ? 'zh-CN' : 'en'}>
+  <head>
+    <meta charset="utf-8" />
+    <Seo title={title} description={description} lang={lang} path={path} />
+    <script is:inline>
+      (() => {
+        const root = document.documentElement;
+        const stored = localStorage.getItem('theme');
+        root.dataset.theme =
+          stored ||
+          (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      })();
+    </script>
+  </head>
+  <body>
+    <SiteHeader lang={lang} />
+    <main>
+      <slot />
+    </main>
+    <SiteFooter lang={lang} />
+    <script is:inline>
+      document.querySelectorAll('[data-theme-toggle]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const root = document.documentElement;
+          const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+          root.dataset.theme = next;
+          localStorage.setItem('theme', next);
+        });
+      });
+    </script>
+  </body>
+</html>

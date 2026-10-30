@@ -1,0 +1,24 @@
+---
+import { t, type Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const repo = 'https://github.com/DeeGor168/aftertone-releases';
+---
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div>
+      <a class="brand" href={lang === 'en' ? '/en/' : '/'}>余音 Aftertone</a>
+      <p class="muted" style="margin-top:8px">{t(lang, 'footer.made')}</p>
+    </div>
+    <div>
+      <p style="margin:0">{t(lang, 'footer.privacy')}</p>
+      <p class="muted" style="margin:0">
+        <a href={repo} rel="noopener">GitHub</a>
+      </p>
+    </div>
+  </div>
+</footer>

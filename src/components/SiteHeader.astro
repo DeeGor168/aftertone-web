@@ -1,0 +1,29 @@
+---
+import { t, type Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const base = lang === 'en' ? '/en' : '';
+const links = [
+  { href: `${base}/download`, label: t(lang, 'nav.download') },
+  { href: `${base}/docs`, label: t(lang, 'nav.docs') },
+  { href: `${base}/changelog`, label: t(lang, 'nav.changelog') },
+  { href: `${base}/about`, label: t(lang, 'nav.about') },
+];
+---
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href={base || '/'}>
+      <span>余音</span>
+      <small>AFTERTONE</small>
+    </a>
+    <nav class="nav">
+      {links.map((l) => <a href={l.href}>{l.label}</a>)}
+      <a href={t(lang, 'lang.switchTo')}>{t(lang, 'lang.switch')}</a>
+      <button class="theme-toggle" data-theme-toggle aria-label={t(lang, 'theme.toggle')}>◐</button>
+    </nav>
+  </div>
+</header>

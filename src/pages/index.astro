@@ -1,0 +1,89 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { loadRelease } from '../lib/release';
+
+const release = loadRelease();
+const version = release.version && release.version !== '0.0.0' ? `v${release.version}` : '';
+
+const features = [
+  { t: '直连自建曲库', d: 'Navidrome / Subsonic / Jellyfin / Emby / Plex，登录页自动探测服务器类型。' },
+  { t: '桌面级音质', d: '桌面端走 libmpv 播放内核，内置均衡器；Android 用 just_audio。' },
+  { t: '离线与缓存', d: '单曲下载、下载管理、元数据 SQLite 缓存，断网也能浏览曲库。' },
+  { t: '歌词与插件', d: '服务端歌词加 lrclib 兜底，可自定义歌词源、封面源与 Scrobble 目标。' },
+  { t: '跨设备同步', d: '播放队列与进度在多台设备间接续，换设备不丢位置。' },
+  { t: '克制，无打扰', d: '没有广告、没有推荐算法、没有社交，只有你和音乐。' },
+];
+
+const platforms = [
+  { t: 'Windows', d: '完整支持：桌面歌词、系统托盘、Inno Setup 安装包、SMTC 媒体控制。' },
+  { t: 'Android', d: '正式签名 APK，按 ABI 拆分，通知栏媒体控制。' },
+  { t: 'Linux', d: 'MPRIS 媒体键可用，运行机需系统 libmpv。' },
+  { t: 'macOS', d: '接入控制中心，沙盒下不支持桌面歌词子进程。' },
+];
+
+const servers = ['Navidrome', 'Subsonic（Airsonic / Gonic）', 'Jellyfin', 'Emby', 'Plex'];
+---
+
+<BaseLayout
+  title="余音 Aftertone · 你的私人音乐馆"
+  description="跨平台 NAS 音乐客户端，直连 Navidrome / Subsonic / Jellyfin / Emby / Plex，为自建曲库提供接近商业音乐 App 的播放与管理体验。"
+  path="/"
+>
+  <section class="section wrap" style="padding-top:96px">
+    <p class="eyebrow">NAS music client</p>
+    <h1>余音绕梁，你的私人音乐馆</h1>
+    <p class="lead" style="margin-top:20px">
+      连接 Navidrome / Subsonic / Jellyfin / Plex，把音乐从流媒体平台的「租用模式」还给你。
+      每一首歌都是属于你的资产，平台下线与你无关。
+    </p>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:32px">
+      <a class="btn btn-primary" href="/download">
+        下载{version ? ` ${version}` : ''} · Windows
+      </a>
+      <a class="btn btn-ghost" href="/download">全部平台</a>
+    </div>
+    <p class="muted" style="margin-top:16px">Windows · macOS · Linux · Android　|　无广告 · 无算法</p>
+  </section>
+
+  <section class="section wrap" style="border-top:1px solid var(--line)">
+    <h2>让音乐回到你手里</h2>
+    <div class="grid grid-3" style="margin-top:32px">
+      {features.map((f) => (
+        <div class="card">
+          <h3 style="font-size:var(--step-1)">{f.t}</h3>
+          <p class="muted" style="margin:8px 0 0">{f.d}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="section wrap" style="border-top:1px solid var(--line)">
+    <h2>四端同一套代码</h2>
+    <div class="grid grid-4" style="margin-top:32px">
+      {platforms.map((p) => (
+        <div class="card">
+          <h3 style="font-size:var(--step-1)">{p.t}</h3>
+          <p class="muted" style="margin:8px 0 0">{p.d}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="section wrap" style="border-top:1px solid var(--line)">
+    <h2>支持的服务端</h2>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:24px">
+      {servers.map((s) => (
+        <span class="card" style="padding:10px 18px">{s}</span>
+      ))}
+    </div>
+    <p class="muted" style="margin-top:20px">
+      协议间统一了模型字段，页面代码不感知具体协议；新增服务端只需实现一套客户端接口。
+    </p>
+  </section>
+
+  <section class="section wrap" style="border-top:1px solid var(--line);text-align:center">
+    <h2>现在就听</h2>
+    <p class="lead" style="margin:16px auto 28px">你的音乐一直在你的硬盘上，只差一个播放器。</p>
+    <a class="btn btn-primary" href="/download">前往下载</a>
+  </section>
+</BaseLayout>
