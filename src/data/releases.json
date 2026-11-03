@@ -1,9 +1,80 @@
 {
-  "version": "0.0.0",
-  "publishedAt": null,
-  "notesUrl": "https://github.com/DeeGor168/aftertone-releases/releases",
-  "assets": [],
-  "fetchedAt": null,
-  "stale": true,
-  "source": null
+  "version": "0.6.1",
+  "publishedAt": "2026-11-03T06:12:01.877178Z",
+  "notesUrl": "https://github.com/DeeGor168/aftertone-releases/releases/tag/v0.6.1",
+  "assets": [
+    {
+      "platform": "windows",
+      "arch": "x64",
+      "kind": "installer",
+      "recommended": true,
+      "label": "AftertoneSetup-v0.6.1.exe",
+      "url": "https://github.com/DeeGor168/aftertone-releases/releases/download/v0.6.1/AftertoneSetup-v0.6.1.exe",
+      "size": 48652963,
+      "sha256": "28976334b865a26487a99b52619a03eaf79f3507f884607375a989eae9109318"
+    },
+    {
+      "platform": "android",
+      "arch": "arm64",
+      "kind": "apk",
+      "recommended": true,
+      "label": "aftertone-android-arm64-v8a-v0.6.1.apk",
+      "url": "https://github.com/DeeGor168/aftertone-releases/releases/download/v0.6.1/aftertone-android-arm64-v8a-v0.6.1.apk",
+      "size": 25220945,
+      "sha256": "492dcf4664877c92b29423249a396e1f6409ac8cdec7755437951ee3bb478a2b"
+    },
+    {
+      "platform": "android",
+      "arch": "armeabi-v7a",
+      "kind": "apk",
+      "recommended": false,
+      "label": "aftertone-android-armeabi-v7a-v0.6.1.apk",
+      "url": "https://github.com/DeeGor168/aftertone-releases/releases/download/v0.6.1/aftertone-android-armeabi-v7a-v0.6.1.apk",
+      "size": 23040191,
+      "sha256": "34e4235f5eeccb6ac007af791fce4c57a270fea3373f920ed461cce6896b28a4"
+    },
+    {
+      "platform": "android",
+      "arch": "universal",
+      "kind": "aab",
+      "recommended": false,
+      "label": "aftertone-android-v0.6.1.aab",
+      "url": "https://github.com/DeeGor168/aftertone-releases/releases/download/v0.6.1/aftertone-android-v0.6.1.aab",
+      "size": 66779071,
+      "sha256": "f72f3936ec4e590b413b1b7e4923c7469005636c6e7df24f89f7099bc6ed27c0"
+    },
+    {
+      "platform": "android",
+      "arch": "x86_64",
+      "kind": "apk",
+      "recommended": false,
+      "label": "aftertone-android-x86_64-v0.6.1.apk",
+      "url": "https://github.com/DeeGor168/aftertone-releases/releases/download/v0.6.1/aftertone-android-x86_64-v0.6.1.apk",
+      "size": 26882834,
+      "sha256": "f065ed65cd4897a0e3b72cba82f76afbb9fbac3ca0a5af57b1013df03120912d"
+    },
+    {
+      "platform": "linux",
+      "arch": "x64",
+      "kind": "archive",
+      "recommended": true,
+      "label": "aftertone-linux-x64-v0.6.1.tar.gz",
+      "url": "https://github.com/DeeGor168/aftertone-releases/releases/download/v0.6.1/aftertone-linux-x64-v0.6.1.tar.gz",
+      "size": 12938047,
+      "sha256": "85dd9ecbfa07ce1780c836c9f682b40dd58a2e17c895e5c3e090278159de140f"
+    },
+    {
+      "platform": "macos",
+      "arch": "universal",
+      "kind": "archive",
+      "recommended": true,
+      "label": "aftertone-macos-v0.6.1.zip",
+      "url": "https://github.com/DeeGor168/aftertone-releases/releases/download/v0.6.1/aftertone-macos-v0.6.1.zip",
+      "size": 33105649,
+      "sha256": "c14a941a014f0be89574bb9bfc71e3c08f9c3f61789a73caff3914bda31ee219"
+    }
+  ],
+  "fetchedAt": "2026-11-03T06:12:24.672Z",
+  "stale": false,
+  "source": "manifest"
 }
