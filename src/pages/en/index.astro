@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { loadRelease } from '../../lib/release';
+import { withBase } from '../../lib/paths';
 
 const release = loadRelease();
 const version = release.version && release.version !== '0.0.0' ? `v${release.version}` : '';
@@ -38,10 +39,10 @@ const servers = ['Navidrome', 'Subsonic (Airsonic / Gonic)', 'Jellyfin', 'Emby',
       rental model of streaming platforms. Every track stays yours.
     </p>
     <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:32px">
-      <a class="btn btn-primary" href="/en/download">
+      <a class="btn btn-primary" href={withBase('/en/download')}>
         Download{version ? ` ${version}` : ''} · Windows
       </a>
-      <a class="btn btn-ghost" href="/en/download">All platforms</a>
+      <a class="btn btn-ghost" href={withBase('/en/download')}>All platforms</a>
     </div>
     <p class="muted" style="margin-top:16px">Windows · macOS · Linux · Android　|　No ads · No algorithm</p>
   </section>
@@ -85,6 +86,6 @@ const servers = ['Navidrome', 'Subsonic (Airsonic / Gonic)', 'Jellyfin', 'Emby',
   <section class="section wrap" style="border-top:1px solid var(--line);text-align:center">
     <h2>Start listening</h2>
     <p class="lead" style="margin:16px auto 28px">Your music is already on your disk. It only needs a player.</p>
-    <a class="btn btn-primary" href="/en/download">Go to downloads</a>
+    <a class="btn btn-primary" href={withBase('/en/download')}>Go to downloads</a>
   </section>
 </BaseLayout>

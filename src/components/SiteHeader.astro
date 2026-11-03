@@ -1,5 +1,6 @@
 ---
 import { t, type Lang } from '../i18n/ui';
+import { withBase } from '../lib/paths';
 
 interface Props {
   lang: Lang;
@@ -7,22 +8,22 @@ interface Props {
 const { lang } = Astro.props;
 const base = lang === 'en' ? '/en' : '';
 const links = [
-  { href: `${base}/download`, label: t(lang, 'nav.download') },
-  { href: `${base}/docs`, label: t(lang, 'nav.docs') },
-  { href: `${base}/changelog`, label: t(lang, 'nav.changelog') },
-  { href: `${base}/about`, label: t(lang, 'nav.about') },
+  { href: withBase(`${base}/download`), label: t(lang, 'nav.download') },
+  { href: withBase(`${base}/docs`), label: t(lang, 'nav.docs') },
+  { href: withBase(`${base}/changelog`), label: t(lang, 'nav.changelog') },
+  { href: withBase(`${base}/about`), label: t(lang, 'nav.about') },
 ];
 ---
 
 <header class="site-header">
   <div class="wrap">
-    <a class="brand" href={base || '/'}>
+    <a class="brand" href={withBase(base || '/')}>
       <span>余音</span>
       <small>AFTERTONE</small>
     </a>
     <nav class="nav">
       {links.map((l) => <a href={l.href}>{l.label}</a>)}
-      <a href={t(lang, 'lang.switchTo')}>{t(lang, 'lang.switch')}</a>
+      <a href={withBase(t(lang, 'lang.switchTo'))}>{t(lang, 'lang.switch')}</a>
       <button class="theme-toggle" data-theme-toggle aria-label={t(lang, 'theme.toggle')}>◐</button>
     </nav>
   </div>

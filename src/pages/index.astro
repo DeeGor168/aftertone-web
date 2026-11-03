@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { loadRelease } from '../lib/release';
+import { withBase } from '../lib/paths';
 
 const release = loadRelease();
 const version = release.version && release.version !== '0.0.0' ? `v${release.version}` : '';
@@ -37,10 +38,10 @@ const servers = ['Navidrome', 'Subsonic（Airsonic / Gonic）', 'Jellyfin', 'Emb
       每一首歌都是属于你的资产，平台下线与你无关。
     </p>
     <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:32px">
-      <a class="btn btn-primary" href="/download">
+      <a class="btn btn-primary" href={withBase('/download')}>
         下载{version ? ` ${version}` : ''} · Windows
       </a>
-      <a class="btn btn-ghost" href="/download">全部平台</a>
+      <a class="btn btn-ghost" href={withBase('/download')}>全部平台</a>
     </div>
     <p class="muted" style="margin-top:16px">Windows · macOS · Linux · Android　|　无广告 · 无算法</p>
   </section>
@@ -84,6 +85,6 @@ const servers = ['Navidrome', 'Subsonic（Airsonic / Gonic）', 'Jellyfin', 'Emb
   <section class="section wrap" style="border-top:1px solid var(--line);text-align:center">
     <h2>现在就听</h2>
     <p class="lead" style="margin:16px auto 28px">你的音乐一直在你的硬盘上，只差一个播放器。</p>
-    <a class="btn btn-primary" href="/download">前往下载</a>
+    <a class="btn btn-primary" href={withBase('/download')}>前往下载</a>
   </section>
 </BaseLayout>
