@@ -289,3 +289,21 @@ img {
 .legal-table td:nth-child(3) {
   width: 44%;
 }
+
+/* 独立声明（例如 App Store 的「不用于追踪」） */
+.legal-callout {
+  margin: 1.75rem 0 0;
+  padding: 1.1rem 1.35rem;
+  border-left: 3px solid var(--c-brand);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+}
+
+.legal .legal-callout h2 {
+  font-size: var(--step-1);
+  margin: 0 0 0.5rem;
+}
+
+.legal .legal-callout p {
+  margin: 0;
+}
