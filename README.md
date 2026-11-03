@@ -7,10 +7,12 @@
 | 仓库 | 可见性 | 内容 |
 |---|---|---|
 | `DeeGor168/aftertone` | 私有 | Flutter 客户端源码 |
-| `DeeGor168/aftertone-releases` | 公开 | 纯产物分发（各平台安装包 + SHA256SUMS） |
+| `DeeGor168/aftertone-releases` | 公开 | 纯产物分发（各平台安装包 + SHA256SUMS + `manifest.json`），不含源码 |
 | `DeeGor168/aftertone-web` | 公开 | 本仓库：官网源码 |
 
-产物必须放在公开仓 —— 私有仓的 Release 未认证不可下载，也不可通过 API 读取。
+客户端仓私有，其 Release 资产匿名不可下载，因此产物统一发布到公开的
+`aftertone-releases`；官网构建只从公开产物仓取数，不受客户端仓可见性影响。
+官网仓保持公开，继续使用 GitHub Pages 托管，Cloudflare Pages 作为可选镜像。
 
 ## 开发
 
