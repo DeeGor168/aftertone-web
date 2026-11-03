@@ -1,4 +1,5 @@
 import fs from 'node:fs';
+import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import type { Lang } from '../i18n/ui';
 
@@ -23,7 +24,29 @@ export type ReleaseData = {
   source?: string | null;
 };
 
-const dataPath = () => fileURLToPath(new URL('../data/releases.json', import.meta.url));
+// Astro 静态构建会把页面代码打进 SSR bundle，此时 import.meta.url 指向构建产物
+// 而不是源码目录，按它拼出的 ../data/releases.json 读不到文件，页面会静默退回
+// 空态。这里依次尝试「按当前模块定位」与「按仓库根目录定位」，取第一个存在的
+// 路径，保证 build/dev 两种环境下都能读到构建前由 fetch-release 写入的数据。
+const dataPath = () => {
+  const candidates: string[] = [];
+  try {
+    candidates.push(
+      fileURLToPath(new URL('../data/releases.json', import.meta.url)),
+    );
+  } catch {
+    // import.meta.url 不是 file: 协议时忽略该候选
+  }
+  candidates.push(path.join(process.cwd(), 'src', 'data', 'releases.json'));
+  for (const candidate of candidates) {
+    try {
+      if (fs.existsSync(candidate)) return candidate;
+    } catch {
+      // 忽略不可访问的候选路径
+    }
+  }
+  return candidates[0];
+};
 
 const EMPTY: ReleaseData = {
   version: '0.0.0',
