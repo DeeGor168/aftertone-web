@@ -1,0 +1,162 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { withBase } from '../lib/paths';
+
+const updated = '2026-11-03';
+---
+
+<BaseLayout
+  title="隐私政策 · 余音 Aftertone"
+  description="余音 Aftertone 隐私政策：无账号系统、无行为追踪，音乐与凭据只保存在你自己的设备和你自己的媒体服务器上。"
+  path="/privacy"
+>
+  <section class="section wrap" style="padding-top:72px">
+    <p class="eyebrow">Privacy</p>
+    <h1>隐私政策</h1>
+    <p class="legal-meta">
+      生效日期：{updated}　最近更新：{updated}　<a href={withBase('/en/privacy')}>English version</a>
+    </p>
+
+    <div class="legal">
+      <div class="card" style="margin-top:24px">
+        <p style="margin:0">
+          余音没有账号系统，也没有云端服务。你的音乐文件、服务器凭据、播放记录与设置只保存在你自己的设备和你自己的媒体服务器上。我们不收集、不上传、不出售你的数据。
+        </p>
+      </div>
+
+      <h2>1. 适用范围</h2>
+      <p>
+        本政策适用于「余音 Aftertone」（下称「余音」）在各平台发布的客户端，包括 Windows、macOS、Linux、Android 与 iOS。
+        余音是一款本地音乐播放器，连接的是你自己搭建或选择的媒体服务器，不提供官方的音乐内容或云端存储。
+      </p>
+
+      <h2>2. 我们不收集的数据</h2>
+      <ul>
+        <li>不要求注册账号，不收集姓名、手机号、邮箱或身份信息；</li>
+        <li>不收集设备标识符、广告标识符、精确位置、通讯录、相册等与播放无关的信息；</li>
+        <li>不集成统计分析、崩溃上报、广告或社交类第三方 SDK；</li>
+        <li>不进行跨应用或跨网站跟踪，iOS 上不请求 App Tracking Transparency 授权；</li>
+        <li>不出售、出租或向第三方共享你的任何数据，也不将其用于广告画像或模型训练。</li>
+      </ul>
+
+      <h2>3. 仅在本机处理的数据</h2>
+      <p>以下数据只在你的设备上生成和保存，不会经过我们：</p>
+      <div class="legal-table">
+        <table>
+          <thead>
+            <tr><th>数据</th><th>用途</th><th>存放位置</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>媒体服务器地址、用户名、密码或令牌</td>
+              <td>连接并登录你的媒体服务器</td>
+              <td>系统安全存储（iOS/macOS 钥匙串、Android Keystore、Windows DPAPI、Linux libsecret）</td>
+            </tr>
+            <tr>
+              <td>媒体库元数据、封面与图片缓存</td>
+              <td>浏览、搜索与播放</td>
+              <td>应用私有目录与本地数据库</td>
+            </tr>
+            <tr>
+              <td>播放记录、收藏、歌单、搜索历史</td>
+              <td>最近播放、播放统计与排序</td>
+              <td>本地数据库</td>
+            </tr>
+            <tr>
+              <td>下载的音频文件与歌词缓存</td>
+              <td>离线播放</td>
+              <td>应用私有目录</td>
+            </tr>
+            <tr>
+              <td>设置、主题、均衡器参数</td>
+              <td>记住你的偏好</td>
+              <td>本地存储</td>
+            </tr>
+            <tr>
+              <td>你主动导出的备份文件</td>
+              <td>迁移与恢复</td>
+              <td>你选择的位置</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>4. 会联网的场景</h2>
+      <p>
+        余音的联网请求只发生在下列场景，全部由你的设备直接发往对应服务，我们不参与转发，也不接收其中的内容：
+      </p>
+      <div class="legal-table">
+        <table>
+          <thead>
+            <tr><th>场景</th><th>发送的内容</th><th>接收方</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>连接与播放</td>
+              <td>服务器地址、登录凭据、播放与同步请求</td>
+              <td>你自己搭建或选择的媒体服务器（Navidrome、Subsonic、Jellyfin、Emby、Plex 等）</td>
+            </tr>
+            <tr>
+              <td>跨设备同步</td>
+              <td>播放进度、收藏等状态</td>
+              <td>同上，你配置的媒体服务器</td>
+            </tr>
+            <tr>
+              <td>获取歌词</td>
+              <td>歌曲名、艺术家、专辑名、时长</td>
+              <td>LRCLIB（lrclib.net）公开歌词 API</td>
+            </tr>
+            <tr>
+              <td>检查更新</td>
+              <td>IP 地址、User-Agent 等常规请求信息</td>
+              <td>GitHub Releases API（api.github.com）</td>
+            </tr>
+            <tr>
+              <td>下载新版本</td>
+              <td>同上</td>
+              <td>应用分发平台或你选择的第三方镜像</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p>
+        上述第三方服务由各自的运营方控制，分别适用其隐私政策。你可以通过不使用歌词兜底、关闭自动更新检查等方式减少这些请求。
+      </p>
+
+      <h2>5. 系统权限</h2>
+      <ul>
+        <li><strong>iOS</strong>：本地网络权限用于发现并连接局域网内的媒体服务器；后台音频用于锁屏或切换到其他应用后继续播放。拒绝本地网络权限时，仍可通过公网地址连接服务器，但局域网自动发现不可用。</li>
+        <li><strong>Android</strong>：仅申请网络访问、唤醒锁与媒体播放前台服务，用于后台播放和下载；不申请存储、定位、通讯录、相机等权限。</li>
+        <li><strong>macOS / Windows / Linux</strong>：联网访问你的服务器，并在应用私有目录读写缓存与下载文件；导出备份时只访问你主动选择的目录。</li>
+      </ul>
+
+      <h2>6. 数据保留与删除</h2>
+      <p>
+        本地数据会一直保留在你的设备上，直到你主动删除。你可以通过应用内的清理功能清除缓存与统计数据，也可以在系统设置中清除应用数据，或直接卸载应用，以上操作都会删除对应内容。
+        卸载前如需保留数据，请先使用应用内的备份导出功能。
+        媒体服务器上的播放记录、收藏等数据由服务器管理员控制，删除方式取决于你所使用的服务端软件。
+      </p>
+
+      <h2>7. 儿童隐私</h2>
+      <p>
+        余音不面向 13 岁以下儿童，我们也不会主动收集儿童的个人信息。若你是未成年人，请在监护人指导下使用本应用。
+      </p>
+
+      <h2>8. 政策变更</h2>
+      <p>
+        本政策可能随功能调整而更新，更新后会修改本页顶部的「最近更新」日期。涉及数据处理方式的重大变更，我们会在官网或应用内提示。
+      </p>
+
+      <h2>9. 联系我们</h2>
+      <p>
+        如对本政策或数据处理有疑问，请通过
+        <a href="https://github.com/DeeGor168/aftertone/issues" rel="noopener">GitHub Issues</a>
+        联系我们。
+      </p>
+
+      <p class="legal-meta" style="margin-top:32px">
+        <a href={withBase('/')}>返回首页</a>　<a href={withBase('/en/privacy')}>English version</a>
+      </p>
+    </div>
+  </section>
+</BaseLayout>

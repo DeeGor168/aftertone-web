@@ -1,6 +1,6 @@
 import type { APIRoute } from 'astro';
 
-const pages = ['/', '/download', '/docs', '/changelog', '/about'];
+const pages = ['/', '/download', '/docs', '/changelog', '/about', '/privacy'];
 const locales = ['zh', 'en'] as const;
 
 function urlFor(base: string, locale: (typeof locales)[number], page: string): string {

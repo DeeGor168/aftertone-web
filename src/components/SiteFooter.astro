@@ -16,7 +16,10 @@ const repo = 'https://github.com/DeeGor168/aftertone-releases';
       <p class="muted" style="margin-top:8px">{t(lang, 'footer.made')}</p>
     </div>
     <div>
-      <p style="margin:0">{t(lang, 'footer.privacy')}</p>
+      <p style="margin:0">
+        <a href={withBase(lang === 'en' ? '/en/privacy' : '/privacy')}>{t(lang, 'footer.privacyLink')}</a>
+      </p>
+      <p class="muted" style="margin:0">{t(lang, 'footer.privacy')}</p>
       <p class="muted" style="margin:0">
         <a href={repo} rel="noopener">GitHub</a>
       </p>

@@ -208,3 +208,67 @@ img {
   padding: 6px 12px;
   cursor: pointer;
 }
+
+/* 法律类页面（隐私政策等） */
+.legal {
+  max-width: 72ch;
+}
+
+.legal h2 {
+  font-size: var(--step-2);
+  margin: 2.5rem 0 0.75rem;
+}
+
+.legal h3 {
+  font-size: var(--step-1);
+  margin: 1.75rem 0 0.5rem;
+}
+
+.legal p,
+.legal li {
+  color: var(--text-soft);
+}
+
+.legal ul {
+  padding-left: 1.2rem;
+}
+
+.legal li {
+  margin: 0.35rem 0;
+}
+
+.legal strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.legal-meta {
+  color: var(--text-faint);
+  font-size: var(--step--1);
+  margin-top: 12px;
+}
+
+.legal-table {
+  overflow-x: auto;
+  margin: 1.25rem 0;
+}
+
+.legal-table table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--step--1);
+}
+
+.legal-table th,
+.legal-table td {
+  text-align: left;
+  padding: 0.65rem 0.75rem;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+
+.legal-table th {
+  color: var(--text-faint);
+  font-weight: 500;
+  white-space: nowrap;
+}
