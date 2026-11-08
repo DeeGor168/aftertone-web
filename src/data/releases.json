@@ -1,18 +1,8 @@
 {
   "version": "0.6.1",
-  "publishedAt": "2026-11-03T06:12:01.877178Z",
+  "publishedAt": "2026-11-03T06:12:07Z",
   "notesUrl": "https://github.com/DeeGor168/aftertone-releases/releases/tag/v0.6.1",
   "assets": [
-    {
-      "platform": "windows",
-      "arch": "x64",
-      "kind": "installer",
-      "recommended": true,
-      "label": "AftertoneSetup-v0.6.1.exe",
-      "url": "https://github.com/DeeGor168/aftertone-releases/releases/download/v0.6.1/AftertoneSetup-v0.6.1.exe",
-      "size": 48652963,
-      "sha256": "28976334b865a26487a99b52619a03eaf79f3507f884607375a989eae9109318"
-    },
     {
       "platform": "android",
       "arch": "arm64",
@@ -72,9 +62,19 @@
       "url": "https://github.com/DeeGor168/aftertone-releases/releases/download/v0.6.1/aftertone-macos-v0.6.1.zip",
       "size": 33105649,
       "sha256": "c14a941a014f0be89574bb9bfc71e3c08f9c3f61789a73caff3914bda31ee219"
+    },
+    {
+      "platform": "windows",
+      "arch": "x64",
+      "kind": "installer",
+      "recommended": true,
+      "label": "AftertoneSetup-v0.6.1.exe",
+      "url": "https://github.com/DeeGor168/aftertone-releases/releases/download/v0.6.1/AftertoneSetup-v0.6.1.exe",
+      "size": 48652963,
+      "sha256": "28976334b865a26487a99b52619a03eaf79f3507f884607375a989eae9109318"
     }
   ],
-  "fetchedAt": "2026-11-08T03:31:37.077Z",
+  "fetchedAt": "2026-11-08T10:55:50.750Z",
   "stale": false,
-  "source": "manifest"
+  "source": "api"
 }
